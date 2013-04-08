@@ -17,7 +17,10 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Collections工具集.
+ * 
  * 在JDK的Collections和Guava的Collections2后, 命名为Collections3.
+ * 
+ * 函数主要由两部分组成，一是自反射提取元素的功能，二是源自Apache Commons Collection, 争取不用在项目里引入它。
  * 
  * @author calvin
  */
@@ -104,6 +107,13 @@ public class Collections3 {
 	}
 
 	/**
+	 * 判断是否为空.
+	 */
+	public static boolean isNotEmpty(Collection collection) {
+		return (collection != null && !(collection.isEmpty()));
+	}
+
+	/**
 	 * 取得Collection的第一个元素，如果collection为空返回null.
 	 */
 	public static <T> T getFirst(Collection<T> collection) {
@@ -122,13 +132,13 @@ public class Collections3 {
 			return null;
 		}
 
-		//当类型为List时，直接取得最后一个元素 。
+		// 当类型为List时，直接取得最后一个元素 。
 		if (collection instanceof List) {
 			List<T> list = (List<T>) collection;
 			return list.get(list.size() - 1);
 		}
 
-		//其他类型通过iterator滚动到最后一个元素.
+		// 其他类型通过iterator滚动到最后一个元素.
 		Iterator<T> iterator = collection.iterator();
 		while (true) {
 			T current = iterator.next();

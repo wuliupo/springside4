@@ -22,8 +22,6 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -31,12 +29,15 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.quickstart.entity.User;
 import org.springside.modules.utils.Encodes;
+
+import com.google.common.base.Objects;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
@@ -60,11 +61,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
 	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
-	 * 本用例不演示授权校验，因此直接返回Null.
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		return null;
+		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+		User user = accountService.findUserByLoginName(shiroUser.loginName);
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		info.addRoles(user.getRoleList());
+		return info;
 	}
 
 	/**
@@ -111,19 +115,31 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		}
 
 		/**
-		 * 重载equals,只计算loginName;
+		 * 重载hashCode,只计算loginName;
 		 */
 		@Override
 		public int hashCode() {
-			return HashCodeBuilder.reflectionHashCode(this, "loginName");
+			return Objects.hashCode(loginName);
 		}
 
 		/**
-		 * 重载equals,只比较loginName
+		 * 重载equals,只计算loginName;
 		 */
 		@Override
 		public boolean equals(Object obj) {
-			return EqualsBuilder.reflectionEquals(this, obj, "loginName");
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ShiroUser other = (ShiroUser) obj;
+			if (loginName == null) {
+				if (other.loginName != null)
+					return false;
+			} else if (!loginName.equals(other.loginName))
+				return false;
+			return true;
 		}
 	}
 }

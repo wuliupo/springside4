@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.category.Smoke;
 
@@ -21,7 +22,9 @@ public class UserManagerFT extends BaseSeleniumTestCase {
 		s.open("/");
 		s.click(By.linkText("帐号管理"));
 		loginAsAdminIfNecessary();
-		assertEquals("Showcase示例:综合演示用例", s.getTitle());
+		s.waitForTitleContains("综合演示用例");
+		WebElement table = s.findElement(By.id("contentTable"));
+		assertEquals("管理员 ", s.getTable(table, 0, 1));
 	}
 
 	@Test
@@ -35,17 +38,17 @@ public class UserManagerFT extends BaseSeleniumTestCase {
 
 		//点击提交按钮
 		s.type(By.name("name"), "user_foo");
-		s.getSelect(By.name("status")).selectByValue("disabled");
+		s.check(By.id("status2"));
 		s.click(By.id("submit_btn"));
 
 		//重新进入用户修改页面, 检查最后修改者
 		s.click(By.id("editLink-user"));
 		assertEquals("user_foo", s.getValue(By.name("name")));
-		assertEquals("disabled", s.getSelect(By.name("status")).getFirstSelectedOption().getText());
+		assertTrue(s.isChecked(By.id("status2")));
 
 		//恢复原有值
 		s.type(By.name("name"), "user");
-		s.getSelect(By.name("status")).selectByValue("enabled");
+		s.check(By.id("status1"));
 		s.click(By.id("submit_btn"));
 	}
 

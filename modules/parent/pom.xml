@@ -4,53 +4,48 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springside</groupId>
 	<artifactId>springside-parent</artifactId>
-	<version>4.0.0.RC4</version>
-	<name>Springside :: Parent</name>
+	<version>4.1.0-SNAPSHOT</version>
+	<name>Springside :: Module :: Parent</name>
 	<packaging>pom</packaging>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.0.0.RC4</springside.version>
-		<spring.version>3.1.2.RELEASE</spring.version>
-		<aspectj.version>1.7.0</aspectj.version>
-		<hibernate.version>4.1.6.Final</hibernate.version>
-		<mybatis.version>3.1.1</mybatis.version>
-		<spring-data-jpa.version>1.1.0.RELEASE</spring-data-jpa.version>
+		<springside.version>4.1.0-SNAPSHOT</springside.version>
+		<spring.version>3.2.2.RELEASE</spring.version>
+		<hibernate.version>4.2.0.Final</hibernate.version>
+		<mybatis.version>3.2.2</mybatis.version>
+		<spring-data-jpa.version>1.3.0.RELEASE</spring-data-jpa.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<shiro.version>1.2.1</shiro.version>
-		<cxf.version>2.6.1</cxf.version>
-		<activemq.version>5.5.1</activemq.version>
-		<quartz.version>2.1.5</quartz.version>
-		<ehcache.version>2.6.0</ehcache.version>
-		<spymemcached.version>2.8.1</spymemcached.version>
-		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
-		<jolokia.version>1.0.5</jolokia.version>
-		<jackson.version>2.0.5</jackson.version>
-		<slf4j.version>1.6.6</slf4j.version>
-		<log4j.version>1.2.17</log4j.version>
+		<cxf.version>2.7.4</cxf.version>
+		<activemq.version>5.7.0</activemq.version>
+		<quartz.version>2.1.7</quartz.version>
+		<ehcache.version>2.6.5</ehcache.version>
+		<spymemcached.version>2.8.9</spymemcached.version>
+		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
+		<jolokia.version>1.1.1</jolokia.version>
+		<jackson.version>2.1.4</jackson.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<logback.version>1.0.11</logback.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
-		<guava.version>13.0</guava.version>
-		<joda-time.version>2.1</joda-time.version>
-		<dozer.version>5.3.2</dozer.version>
-		<httpclient.version>4.2.1</httpclient.version>
+		<guava.version>14.0.1</guava.version>
+		<joda-time.version>2.2</joda-time.version>
+		<dozer.version>5.4.0</dozer.version>
+		<httpclient.version>4.2.3</httpclient.version>
 		<freemarker.version>2.3.19</freemarker.version>
-		<junit.version>4.10</junit.version>
-		<mockito.version>1.9.0</mockito.version>
-		<powermock.version>1.4.12</powermock.version>
-		<selenium.version>2.25.0</selenium.version>
-		<jetty.version>7.6.5.v20120716</jetty.version>
-		<h2.version>1.3.168</h2.version>
+		<junit.version>4.11</junit.version>
+		<mockito.version>1.9.5</mockito.version>
+		<powermock.version>1.5</powermock.version>
+		<selenium.version>2.31.0</selenium.version>
+		<jetty.version>7.6.10.v20130312</jetty.version>
+		<h2.version>1.3.171</h2.version>
 
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
 	</properties>
-	
-	<prerequisites>
-   		<maven>3.0</maven>
- 	</prerequisites>
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
@@ -69,15 +64,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		
-	    <repository>
-	      <id>spy</id>
-	      <name>Spy Repository</name>
-	      <layout>default</layout>
-	      <url>http://files.couchbase.com/maven2/</url>
-	      <snapshots>
-	        <enabled>false</enabled>
-	      </snapshots>
+			
+		<repository>
+			<id>spy</id>
+			<name>Spy Repository</name>
+			<url>http://files.couchbase.com/maven2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 	    </repository>
 	</repositories>
 
@@ -110,8 +104,7 @@
 			</dependency>
 			<!-- SPRINGSIDE MODULES end -->
 
-			<!-- SPRING begin -->
-			<!-- spring basic -->
+			<!-- SPRING basic begin(一般不需要显式定义) -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
@@ -135,13 +128,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-context-support</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-
-			<!-- spring tx -->
-			<dependency>
-				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
@@ -150,29 +136,27 @@
 				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<!-- email/scheduler/freemarker -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- SPRING basic end -->			
+			
+			<!-- AOP begin-->
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjrt</artifactId>
-				<version>${aspectj.version}</version>
+				<version>1.7.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>${aspectj.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cglib</groupId>
-				<artifactId>cglib</artifactId>
-				<version>2.2.2</version>
+				<version>1.7.2</version>
 				<scope>runtime</scope>
 			</dependency>
-			<dependency>
-				<groupId>asm</groupId>
-				<artifactId>asm</artifactId>
-				<version>3.3.1</version>
-				<scope>runtime</scope>
-			</dependency>
-			<!-- SPRING end -->
+			<!-- AOP end -->
 
 			<!-- PERSISTENCE begin -->
 			<!-- hibernate -->
@@ -214,7 +198,7 @@
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis-spring</artifactId>
-				<version>1.1.1</version>
+				<version>1.2.0</version>
 			</dependency>
 
 			<!-- spring orm -->
@@ -337,6 +321,19 @@
 			</dependency>
 			<!-- SOAP end -->
 
+			<!-- JAX-RS begin -->
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+	            <artifactId>jackson-jaxrs-json-provider</artifactId>
+	            <version>${jackson.version}</version>
+        	</dependency>
+			<!-- JAX-RS end -->
+			
 			<!-- JMS begin -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -410,6 +407,11 @@
 			<!-- JSON begin -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>			
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
@@ -433,41 +435,11 @@
 				</exclusions>
 			</dependency>
 
-			<!-- 重新定义Java XPath Engine, exclude不必要的依赖 -->
+			<!-- 重新定义Java XPath Engine到最新版，避免旧版那些不必要的依赖 -->
 			<dependency>
 				<groupId>jaxen</groupId>
 				<artifactId>jaxen</artifactId>
-				<version>1.1.3</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>dom4j</groupId>
-						<artifactId>dom4j</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>jdom</groupId>
-						<artifactId>jdom</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xom</groupId>
-						<artifactId>xom</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>maven-plugins</groupId>
-						<artifactId>maven-cobertura-plugin</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>maven-plugins</groupId>
-						<artifactId>maven-findbugs-plugin</artifactId>
-					</exclusion>
-				</exclusions>
+				<version>1.1.4</version>
 			</dependency>
 			<!-- XML end -->			
 			
@@ -478,15 +450,22 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-
-			<!-- slf4j-log4j绑定 -->
+			
+			<!-- logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			
+			<!-- log4j 实际调用slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
+				<artifactId>log4j-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
 				<scope>runtime</scope>
 			</dependency>
-
+			
 			<!-- common-logging 实际调用slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -502,13 +481,6 @@
         		<version>${slf4j.version}</version>
         		<scope>runtime</scope>
       		</dependency>
-
-			<!-- log4j -->
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
 
 			<!-- log4jdbc -->
 			<dependency>
@@ -533,7 +505,7 @@
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
-				<version>1.6</version>
+				<version>1.7</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-beanutils</groupId>
@@ -560,6 +532,17 @@
 				<artifactId>joda-time</artifactId>
 				<version>${joda-time.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time-jsptags</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<!-- joda for jackson -->
+			<dependency>
+	            <groupId>com.fasterxml.jackson.datatype</groupId>
+	            <artifactId>jackson-datatype-joda</artifactId>
+	            <version>2.1.2</version>
+        	</dependency>	
 			<!-- GENERAL UTILS end -->
 
 			<!-- OTHER TOOLS begin -->
@@ -568,6 +551,12 @@
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
 				<version>${dozer.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			
 			<!-- httpclient -->
@@ -594,7 +583,7 @@
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
-				<version>1.4.5</version>
+				<version>1.4.6</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.activation</groupId>
@@ -740,7 +729,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
+					<version>3.0</version>
 					<configuration>
 						<source>${jdk.version}</source>
 						<target>${jdk.version}</target>
@@ -752,14 +741,14 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
+					<version>2.6</version>
 				</plugin>
 
 				<!-- test插件, 仅测试名称为*Test的类, 使用支持分组测试的surefire-junit47 driver -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.12</version>
+					<version>2.13</version>
 					<configuration>
 						<includes>
 							<include>**/*Test.java</include>
@@ -769,7 +758,7 @@
 						<dependency>
 							<groupId>org.apache.maven.surefire</groupId>
 							<artifactId>surefire-junit47</artifactId>
-							<version>2.12</version>
+							<version>2.12.4</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -792,7 +781,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.2</version>
+					<version>2.3</version>
 					<configuration>
 						<warName>${project.artifactId}</warName>
 					</configuration>
@@ -814,7 +803,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>2.1.2</version>
+					<version>2.2</version>
 				</plugin>
 
 				<!-- clean插件 -->
@@ -828,14 +817,14 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>2.3.1</version>
+					<version>2.4</version>
 				</plugin>
 				
 				<!-- enforcer插件, 避免被依赖的依赖引入过期的jar包 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>1.1.1</version>
+					<version>1.2</version>
 					<executions>
 						<execution>
 							<id>enforce-banned-dependencies</id>
@@ -844,6 +833,12 @@
 							</goals>
 							<configuration>
 								<rules>
+									<requireMavenVersion>
+                  						<version>3.0.3</version>
+                					</requireMavenVersion>
+                					<requireJavaVersion>
+                  						<version>1.6</version>
+                					</requireJavaVersion>
 									<bannedDependencies>
 										<searchTransitive>true</searchTransitive>
 										<excludes>
@@ -868,6 +863,15 @@
 					<configuration>
 						<downloadSources>true</downloadSources>
 						<downloadJavadocs>false</downloadJavadocs>
+						<!-- 增加设置项目encoding的文件 -->
+						<additionalConfig>
+							<file>
+								<name>.settings/org.eclipse.core.resources.prefs</name>
+								<content>
+						                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
+								</content>
+							</file>
+						</additionalConfig>						
 					</configuration>
 				</plugin>
 
@@ -882,19 +886,19 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.3</version>
+					<version>2.4</version>
 				</plugin>
 
 				<!-- dependency相关插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.6</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
-					<version>1.3.1</version>
+					<version>2.0</version>
 				</plugin>
 
 				<!-- ant插件 -->
@@ -913,6 +917,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
 	<profiles>
 		<!-- 执行@Category(Smoke.class)的TestCase -->
 		<profile>
